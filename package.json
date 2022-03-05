@@ -9,14 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@harmony-js/core": "^0.1.57",
     "ethers": "^5.5.4",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0",
     "web3modal": "^1.9.5"
   },
   "devDependencies": {
-    "eslint": "8.9.0",
-    "eslint-config-next": "12.1.0"
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "12.1.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }

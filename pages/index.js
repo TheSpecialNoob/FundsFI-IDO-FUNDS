@@ -215,9 +215,9 @@ export default function Home() {
 
     // If user is not connected to the Ropsten network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 3) {
-      window.alert("Change the network to Ropsten");
-      throw new Error("Change network to Ropsten");
+    if (chainId !== 1666600000) {
+      window.alert("Change the network to Harmony Mainnet");
+      throw new Error("Change network to Harmony Mainnet");
     }
 
     if (needSigner) {
@@ -250,7 +250,7 @@ export default function Home() {
       // Assign the Web3Modal class to the reference object by setting it's `current` value
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
-        network: "ropsten",
+        network: "Harmony",
         providerOptions: {},
         disableInjectedProvider: false,
       });
@@ -304,7 +304,7 @@ export default function Home() {
           disabled={!(tokenAmount > 0)}
           onClick={() => mintCryptoDevToken(tokenAmount)}
         >
-          Mint Tokens
+          Buy Tokens
         </button>
       </div>
     );
@@ -313,26 +313,25 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Crypto Devs</title>
+        <title>FundsFi IDO Round 1</title>
         <meta name="description" content="ICO-Dapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Crypto Devs ICO!</h1>
+          <h1 className={styles.title}>Welcome to FundsFi IDO!</h1>
           <div className={styles.description}>
-            You can claim or mint Crypto Dev tokens here
+            You can claim or mint $FUNDS tokens here
           </div>
           {walletConnected ? (
             <div>
               <div className={styles.description}>
                 {/* Format Ether helps us in converting a BigNumber to string */}
-                You have minted {utils.formatEther(balanceOfCryptoDevTokens)} Crypto
-                Dev Tokens
+                You have bought {utils.formatEther(balanceOfCryptoDevTokens)} $FUNDS Tokens
               </div>
               <div className={styles.description}>
                 {/* Format Ether helps us in converting a BigNumber to string */}
-                Overall {utils.formatEther(tokensMinted)}/10000 have been minted!!!
+                Overall {utils.formatEther(tokensMinted)}/10,000,000 have been bought!!!
               </div>
               {renderButton()}
             </div>
@@ -348,7 +347,7 @@ export default function Home() {
       </div>
 
       <footer className={styles.footer}>
-        Made with &#10084; by Crypto Devs
+        Made By &#10084; FundsFi
       </footer>
     </div>
   );
