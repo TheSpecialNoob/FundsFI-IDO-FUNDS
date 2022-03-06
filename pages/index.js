@@ -126,11 +126,11 @@ export default function Home() {
         TOKEN_CONTRACT_ABI,
         signer
       );
-      // Each token is of `0.001 ether`. The value we need to send is `0.001 * amount`
-      const value = 0.001 * amount;
+      // Each token is of `0.05 ether`. The value we need to send is `0.05 * amount`
+      const value = 0.05 * amount;
       const tx = await tokenContract.mint(amount, {
-        // value signifies the cost of one crypto dev token which is "0.001" eth.
-        // We are parsing `0.001` string to ether using the utils library from ethers.js
+        // value signifies the cost of one crypto dev token which is "0.05" eth.
+        // We are parsing `0.05` string to ether using the utils library from ethers.js
         value: utils.parseEther(value.toString()),
       });
       setLoading(true);
