@@ -1,4 +1,5 @@
 import { BigNumber, Contract, providers, utils } from "ethers";
+
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
@@ -20,8 +21,8 @@ export default function Home() {
   // tokensToBeClaimed keeps track of the number of tokens that can be claimed
   // based on the Crypto Dev NFT's held by the user for which they havent claimed the tokens
   const [tokensToBeClaimed, setTokensToBeClaimed] = useState(zero);
-  // balanceOfCryptoDevTokens keeps track of number of Crypto Dev tokens owned by an address
-  const [balanceOfCryptoDevTokens, setBalanceOfCryptoDevTokens] = useState(
+  // balanceOfFUNDSTokens keeps track of number of Crypto Dev tokens owned by an address
+  const [balanceOfFUNDSTokens, setBalanceOfFUNDSTokens] = useState(
     zero
   );
   // amount of the tokens that the user wants to mint
@@ -84,9 +85,9 @@ export default function Home() {
   };
 
   /**
-   * getBalanceOfCryptoDevTokens: checks the balance of Crypto Dev Tokens's held by an address
+   * getBalanceOfFUNDSTokens: checks the balance of Crypto Dev Tokens's held by an address
    */
-  const getBalanceOfCryptoDevTokens = async () => {
+  const getBalanceOfFUNDSTokens = async () => {
     try {
       // Get the provider from web3Modal, which in our case is MetaMask
       // No need for the Signer here, as we are only reading state from the blockchain
@@ -104,17 +105,17 @@ export default function Home() {
       // call the balanceOf from the token contract to get the number of tokens held by the user
       const balance = await tokenContract.balanceOf(address);
       // balance is already a big number, so we dont need to convert it before setting it
-      setBalanceOfCryptoDevTokens(balance);
+      setBalanceOfFUNDSTokens(balance);
     } catch (err) {
       console.error(err);
-      setBalanceOfCryptoDevTokens(zero);
+      setBalanceOfFUNDSTokens(zero);
     }
   };
 
   /**
-   * mintCryptoDevToken: mints `amount` number of tokens to a given address
+   * mintFUNDSToken: mints `amount` number of tokens to a given address
    */
-  const mintCryptoDevToken = async (amount) => {
+  const mintFUNDSToken = async (amount) => {
     try {
       // We need a Signer here since this is a 'write' transaction.
       // Create an instance of tokenContract
@@ -137,7 +138,7 @@ export default function Home() {
       await tx.wait();
       setLoading(false);
       window.alert("Sucessfully minted Crypto Dev Tokens");
-      await getBalanceOfCryptoDevTokens();
+      await getBalanceOfFUNDSTokens();
       await getTotalTokensMinted();
       await getTokensToBeClaimed();
     } catch (err) {
@@ -146,9 +147,9 @@ export default function Home() {
   };
 
   /**
-   * claimCryptoDevTokens: Helps the user claim Crypto Dev Tokens
+   * claimFUNDSTokens: Helps the user claim Crypto Dev Tokens
    */
-  const claimCryptoDevTokens = async () => {
+  const claimFUNDSTokens = async () => {
     try {
       // We need a Signer here since this is a 'write' transaction.
       // Create an instance of tokenContract
@@ -165,7 +166,7 @@ export default function Home() {
       await tx.wait();
       setLoading(false);
       window.alert("Sucessfully claimed Crypto Dev Tokens");
-      await getBalanceOfCryptoDevTokens();
+      await getBalanceOfFUNDSTokens();
       await getTotalTokensMinted();
       await getTokensToBeClaimed();
     } catch (err) {
@@ -213,11 +214,11 @@ export default function Home() {
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
 
-    // If user is not connected to the Ropsten network, let them know and throw an error
+    // If user is not connected to the Harmony Mainnet, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
     if (chainId !== 1666600000) {
-      window.alert("Change the network to Harmony Mainnet");
-      throw new Error("Change network to Harmony Mainnet");
+      window.alert("Change the network to Harmony Mainnet Chain ID: 1666600000");
+      throw new Error("Change network to Harmony Mainnet Chain ID: 1666600000");
     }
 
     if (needSigner) {
@@ -256,7 +257,7 @@ export default function Home() {
       });
       connectWallet();
       getTotalTokensMinted();
-      getBalanceOfCryptoDevTokens();
+      getBalanceOfFUNDSTokens();
       getTokensToBeClaimed();
     }
   }, [walletConnected]);
@@ -280,7 +281,7 @@ export default function Home() {
           <div className={styles.description}>
             {tokensToBeClaimed * 10} Tokens can be claimed!
           </div>
-          <button className={styles.button} onClick={claimCryptoDevTokens}>
+          <button className={styles.button} onClick={claimFUNDSTokens}>
             Claim Tokens
           </button>
         </div>
@@ -301,8 +302,8 @@ export default function Home() {
 
         <button
           className={styles.button}
-          disabled={!(tokenAmount > 0)}
-          onClick={() => mintCryptoDevToken(tokenAmount)}
+          enabled={!(tokenAmount > 0)}
+          onClick={() => mintFUNDSToken(tokenAmount)}
         >
           Buy Tokens
         </button>
@@ -327,7 +328,7 @@ export default function Home() {
             <div>
               <div className={styles.description}>
                 {/* Format Ether helps us in converting a BigNumber to string */}
-                You have bought {utils.formatEther(balanceOfCryptoDevTokens)} $FUNDS Tokens
+                You have bought {utils.formatEther(balanceOfFUNDSTokens)} $FUNDS Tokens
               </div>
               <div className={styles.description}>
                 {/* Format Ether helps us in converting a BigNumber to string */}
@@ -341,14 +342,52 @@ export default function Home() {
             </button>
           )}
         </div>
+
+                <div>
+                <h2 className={styles.title}>Round 1 Presale Terms!</h2>
+                <div className={styles.description}>
+                1 $FUNDS = $0.10
+                </div>
+                <div className={styles.description}>
+                You have to get whitelisted to be able to buy $FUNDS. Buy FundsFi Round 1 NFT to get whitelisted. Go to fundsfi.one 
+                </div>
+
         <div>
           <img className={styles.image} src="./0.svg" />
         </div>
       </div>
 
-      <footer className={styles.footer}>
+      
+      <br></br>
+        
+        <div class="post">
+      <a href="https://medium.com/@FundsFi" target="_blank">Medium </a>
+      <br></br>
+      <br></br>
+      <a href="https://discord.gg/H47xrzSYsM" target="_blank">Discord</a>
+      <br></br>
+      <br></br>
+      <a href="https://twitter.com/FundsFi" target="_blank">Twitter</a>
+      <br></br>
+      <br></br>
+      <a href="https://t.me/+ICMCiOUkYb8zMzZh" target="_blank">Telegram</a>
+      <br></br>
+      <br></br>
+      <a href="https://one-usd.gitbook.io/fundsfi-whitepaper/" target="_blank">WhitePaper</a>
+      <br></br>
+      <br></br>
+      <a href="https://github.com/TheSpecialNoob/FundsFi-Round-1-Presale-NFT-Contracts" target="_blank">GitHub</a>     
+    </div>
+    <br></br>
+    <br></br>
+    <footer className={styles.footer}>
         Made By &#10084; FundsFi
+        
+      
       </footer>
     </div>
+  </div>
+
+  
   );
 }

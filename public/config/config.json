@@ -1,0 +1,16 @@
+{
+  "CONTRACT_ADDRESS": "0xf8657861AEf3eF9CeAc308b4fD89EdfE46670691", 
+  "SCAN_LINK": "https://explorer.harmony.one/address/0xf8657861AEf3eF9CeAc308b4fD89EdfE46670691?activeTab=7",
+  "NETWORK": {
+    "NAME": "Harmony",
+    "SYMBOL": "ONE",
+    "ID": 1666600000
+  },
+  "TOKEN_NAME": "FundsFi",
+  "SYMBOL": "FUNDS",
+  "MAX_SUPPLY": 10000000,
+  "WEI_COST": 100000000000000000000,
+  "DISPLAY_COST": 100,
+  "GAS_LIMIT": 985000,
+  "SHOW_BACKGROUND": true
+}
